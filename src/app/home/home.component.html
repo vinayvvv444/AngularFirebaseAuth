@@ -1,0 +1,51 @@
+
+
+<p *ngIf="user">Logged in as {{user?.email}} - {{user?.displayName }}</p>
+
+<div *ngIf="user">
+  {{user | json}}
+
+  {{user.displayName}}
+
+  <!-- <input type="file" (change)="onFileSelected($event)"> -->
+  <button type="button" (click)="onUpload()">Upload</button>
+</div>
+
+<div *ngIf="userData && user">
+{{userData | json }}
+
+{{userData.lastname}}
+</div>
+
+
+
+
+
+<img *ngIf="user" src="{{user?.photoURL}}" />
+<img *ngIf="userData && user" src="{{userData?.photoURL}}" />
+
+<div *ngIf="auth.user$ | async as user; else login">
+    <pre> {{user | json}}
+    </pre>
+<hr>
+
+  </div>
+  <button class="button" *ngIf="user" (click)="auth.signOut()">Sign Out</button>
+
+  <mat-card>
+  <div>
+    <ng-template #login>
+     <!-- <a href="/secret">Secret</a> -->
+      <button class="button" *ngIf="!user" (click)="auth.googleSignin()" color="primary" mat-raised-button>Login with Google</button>
+      
+    </ng-template>
+      
+      <button class="btn btn-primary" *ngIf="!user" (click)="register()">Register</button>
+      <!-- <button class="btn btn-primary" *ngIf="user" (click)="logout()">Logout</button> -->
+      <button class="btn btn-primary" *ngIf="!user" (click)="login1()">Login</button>
+      
+      
+      <!-- <button class="btn btn-primary" *ngIf="user" (click)="logout()">Logout</button> -->
+  </div>
+</mat-card>
+
